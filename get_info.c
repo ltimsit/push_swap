@@ -6,7 +6,7 @@
 /*   By: ltimsit- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 16:08:53 by ltimsit-          #+#    #+#             */
-/*   Updated: 2019/05/30 17:23:48 by ltimsit-         ###   ########.fr       */
+/*   Updated: 2019/06/04 14:01:56 by ltimsit-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,18 @@ int	check_int(char *str, int sign)
 	return (1);
 }
 
-int check_str(char *str)
+int		free_trim(char *str)
 {
-	int i;
-	int j;
-	int sign;
-	char *trim_str;
+	ft_memdel((void **)&str);
+	return (0);
+}
+
+int		check_str(char *str)
+{
+	int		i;
+	int		j;
+	int		sign;
+	char	*trim_str;
 
 	sign = 1;
 	j = 0;
@@ -40,20 +46,16 @@ int check_str(char *str)
 			trim_str[j + 1] >= '0' && trim_str[j + 1] <= '9')
 		sign = 44 - trim_str[j++];
 	if (trim_str[j] < '0' || trim_str[j] > '9')
-	{
-		free(trim_str);
-		return (0);
-	}
+		return (free_trim(trim_str));
 	while (trim_str[j] == '0')
 		j++;
 	while ((trim_str[j + i] >= '0') && (trim_str[j + i] <= '9'))
 		i++;
-	if (i > 10 || trim_str[j + i] || (i == 10 && !(check_int(trim_str + j, sign))))
-	{
-		free(trim_str);
-		return (0);
-	}
+	if (i > 10 || trim_str[j + i] || (i == 10 &&
+				!(check_int(trim_str + j, sign))))
+		return (free_trim(trim_str));
 	free(trim_str);
+	trim_str = NULL;
 	return (1);
 }
 

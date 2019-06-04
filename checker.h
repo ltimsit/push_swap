@@ -6,7 +6,7 @@
 /*   By: ltimsit- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 16:22:30 by ltimsit-          #+#    #+#             */
-/*   Updated: 2019/06/02 19:41:26 by ltimsit-         ###   ########.fr       */
+/*   Updated: 2019/06/04 13:50:12 by ltimsit-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct	s_pile
 	int			max_size;
 	int 		*pile_tab;
 	int			*pile2_tab;
+	int			*mod_tab;
+	int			*mod2_tab;
 	int			top;
 	int			top2;
 	int			b_min_index;
