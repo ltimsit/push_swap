@@ -6,7 +6,7 @@
 /*   By: ltimsit- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 18:37:58 by ltimsit-          #+#    #+#             */
-/*   Updated: 2019/05/26 19:03:45 by ltimsit-         ###   ########.fr       */
+/*   Updated: 2019/06/01 15:33:59 by ltimsit-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,37 @@ int		check_commands(t_command *command)
 
 	tab = NULL;
 	size_tab = 0;
+//	do_one_cmd(pile, command, -1);
+	while ((ret = get_next_line(0, &line)))
+	{
+		if (ret == (-1) || (index = check_line(line)) == -1)
+		{
+			free(tab);
+			free(line);
+			return (0);
+		}
+		tab = (int *)ft_realloc(tab, size_tab, size_tab + 1, sizeof(*tab));
+		tab[size_tab] = index;
+//		do_one_cmd(pile, command, index);
+		free(line);
+		size_tab++;
+	}
+	command->tab = tab;
+	command->size = size_tab;
+	return (1);
+}
+
+int		check_and_do_commands(t_command *command, t_pile *pile)
+{
+	int		ret;
+	int		index;
+	char	*line;
+	int		*tab;
+	size_t	size_tab;
+
+	tab = NULL;
+	size_tab = 0;
+	do_one_cmd(pile, -1);
 	while ((ret = get_next_line(0, &line)))
 	{
 		if (ret == (-1) || (index = check_line(line)) == -1)
@@ -88,6 +119,8 @@ int		check_commands(t_command *command)
 		tab[size_tab] = index;
 		free(line);
 		size_tab++;
+		do_one_cmd(pile, index);
+		printf("NB CMD = %zu\n", size_tab);
 	}
 	command->tab = tab;
 	command->size = size_tab;

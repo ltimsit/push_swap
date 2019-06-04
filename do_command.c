@@ -6,7 +6,7 @@
 /*   By: ltimsit- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/26 16:26:29 by ltimsit-          #+#    #+#             */
-/*   Updated: 2019/05/28 13:17:04 by ltimsit-         ###   ########.fr       */
+/*   Updated: 2019/05/31 20:10:05 by ltimsit-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	c_pa(t_pile *pile)
 		elem2 = pile->pile_tab + pile->top - 1;
 		ft_memcpy(elem2, elem1, sizeof(pile->pile_tab));
 		pile->top2--;
+		ft_printf("|TOP2 = %d|", pile->top2);
 	}
 }
 
@@ -83,6 +84,7 @@ void	c_pb(t_pile *pile)
 		elem2 = pile->pile2_tab + pile->top2 - 1;
 		ft_memcpy(elem2, elem1, sizeof(pile->pile2_tab));
 		pile->top--;
+		ft_printf("|TOP = %d|", pile->top);
 	}
 }
 
@@ -193,6 +195,44 @@ void	c_rrr(t_pile *pile)
 {
 	c_rra(pile);
 	c_rrb(pile);
+}
+
+int		do_one_cmd(t_pile *pile, int index)
+{
+	int i;
+	int j;
+	int k;
+
+//	cmd->size++;
+//	cmd->tab[cmd->size - 1] = index;
+	k = pile->max_size - 1;
+	if (index >= 0)
+		g_cmd_fct[index](pile);
+	i = pile->top - 1;
+	j = pile->top2 - 1;
+	while (k > i && k > j)
+	{
+		ft_printf("\033[0;31m|%10c|%10c|\033[0m\n", ' ', ' ');
+		k--;
+	}
+	while (i > j && i >= 0)
+	{
+		ft_printf("|%10d|%10c|\n", pile->pile_tab[i], ' ');
+		i--;
+	}
+	while (j > i && j >= 0)
+ 	{
+		ft_printf("|%10c|%10d|\n", ' ', pile->pile2_tab[j]);
+		j--;
+	}
+	while (i >= 0 && j >= 0)
+	{
+		ft_printf("|%10d|%10d|\n", pile->pile_tab[i], pile->pile2_tab[j]);
+		i--;
+		j--;
+	}
+	ft_printf("\n");
+	return (1);
 }
 
 void	do_cmd(t_pile *pile, t_command *cmd)

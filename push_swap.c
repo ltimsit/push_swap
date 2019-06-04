@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_info.c                                         :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ltimsit- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/25 16:08:53 by ltimsit-          #+#    #+#             */
-/*   Updated: 2019/05/30 17:23:48 by ltimsit-         ###   ########.fr       */
+/*   Created: 2019/05/29 16:35:10 by ltimsit-          #+#    #+#             */
+/*   Updated: 2019/05/31 13:08:13 by ltimsit-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,18 +105,26 @@ int	check_nbr(int c, char **v, t_pile *pile)
 void print(t_pile *pile, t_command *cmd)
 {
 	int i;
+	int nb;
 
+	nb = 0;
+	printf("top = %d\n", pile->top);
 	i = pile->top;
 	while (i--)
 	{
-		printf("pile %d\n", pile->pile_tab[i]);
+		printf("|%10d|\n", pile->pile_tab[i]);
 	}
 	i = 0;
 	while (i < cmd->size)
 	{
-		printf("command %d\n", cmd->tab[i]);
+		if (cmd->tab[i] != -1)
+		{
+			printf("command |%10d|\n", cmd->tab[i]);
+			nb++;
+		}
 		i++;
 	}
+	ft_printf("total = %d\n", nb);
 }
 
 int	main(int argc, char **argv)
@@ -125,6 +133,8 @@ int	main(int argc, char **argv)
 	t_pile		pile;
 	t_command	command;
 
+	command.tab = (int *)malloc(sizeof(int) * 1000);
+	command.size = 0;
 	pile.top = argc - 1;
 	pile.max_size = argc - 1;
 	pile.top2 = 0;
@@ -133,14 +143,15 @@ int	main(int argc, char **argv)
 		return (0);
 	init_cmd_fct();
 	pile.pile2_tab = (int *)malloc(sizeof(int) * argc - 1);
-	if (argc < 2 || !(check_nbr(argc, argv, &pile))
-			|| !(check_and_do_commands(&command, &pile)))
+	if (argc < 2 || !(check_nbr(argc, argv, &pile)))
 	{
 		write(2, "Error\n", 6);
 		return (0);
 	}
-	print(&pile, &command);
-	do_cmd(&pile, &command);
+	get_next_command(&command, &pile);
+	reduce_cmd(&command, 4, 3);
+	reduce_cmd(&command, 6, 9);
+	remove_duo(&command);
 	print(&pile, &command);
 	return (0);
 }
