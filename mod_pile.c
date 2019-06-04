@@ -6,7 +6,7 @@
 /*   By: ltimsit- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 14:02:15 by ltimsit-          #+#    #+#             */
-/*   Updated: 2019/06/04 16:45:59 by ltimsit-         ###   ########.fr       */
+/*   Updated: 2019/06/04 17:19:14 by ltimsit-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ void	get_mod_tab(t_pile *pile)
 	while (--i >= 0)
 	{
 			a = pile->pile_tab[i] - i;
-			if (i < pile->top)
+			if (pile->pile_tab[i] < pile->top)
 				b = a < 0 ? pile->top + a : a - pile->top;
 			else
 				b = a < 0 ? i + a : a - i;
 
 			//printf("|%d|%d\n", a, b);
 			pile->mod_tab[i] = abs_val(a) < abs_val(b) ? a : b;
+			if (pile->mod_tab[i] > pile->top - a)
+				pile->mod_tab[i] = 0;
 			printf("|%d|\n", pile->mod_tab[i]);
 	}
 }
@@ -50,11 +52,15 @@ void	get_mod_tab2(t_pile *pile)
 	while (--i >= 0)
 	{
 			a = (pile->top2 - pile->pile2_tab[i]) - i;
-			if (i < pile->top2)
+			if (pile->pile2_tab[i] < pile->top2)
 				b = a < 0 ? pile->top2 + a : a - pile->top2;
 			else
 				b = a < 0 ? i + a : a - i;
 
+			if (pile->mod2_tab[i] > pile->top2 - a)
+				pile->mod2_tab[i] = 0;
+			if (pile->mod_tab[i] > pile->top - a)
+				pile->mod_tab[i] = 0;
 			//printf("|%d|%d\n", a, b);
 			pile->mod2_tab[i] = abs_val(a) < abs_val(b) ? a : b;
 			printf("          s  |%d|\n", pile->mod2_tab[i]);
