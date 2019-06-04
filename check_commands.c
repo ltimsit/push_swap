@@ -6,7 +6,7 @@
 /*   By: ltimsit- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 18:37:58 by ltimsit-          #+#    #+#             */
-/*   Updated: 2019/06/04 14:02:59 by ltimsit-         ###   ########.fr       */
+/*   Updated: 2019/06/04 16:30:13 by ltimsit-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ int		check_and_do_commands(t_command *command, t_pile *pile)
 		free(line);
 		size_tab++;
 		do_one_cmd(pile, index);
+		get_mod_tab(pile);
+		get_mod_tab2(pile);
 		printf("NB CMD = %zu\n", size_tab);
 	}
 	command->tab = tab;

@@ -6,7 +6,7 @@
 /*   By: ltimsit- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 16:22:30 by ltimsit-          #+#    #+#             */
-/*   Updated: 2019/06/04 13:50:12 by ltimsit-         ###   ########.fr       */
+/*   Updated: 2019/06/04 16:30:25 by ltimsit-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct	s_pile
 	int			max_size;
 	int 		*pile_tab;
 	int			*pile2_tab;
+	int			*qs_pile;
 	int			*mod_tab;
 	int			*mod2_tab;
 	int			top;
@@ -65,6 +66,10 @@ int				do_one_cmd(t_pile *pile, int index);
 void			get_next_command(t_command *cmd, t_pile *pile);
 void			reduce_cmd(t_command *cmd, int a, int b);
 void			remove_duo(t_command *cmd);
+int				quick_sort(int *array, int start, int end);
+int				init_to_qs(t_pile *pile);
+void			get_mod_tab(t_pile *pile);
+void			get_mod_tab2(t_pile *pile);
 
 void			(*g_cmd_fct[11])(t_pile *);
 

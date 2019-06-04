@@ -6,7 +6,7 @@
 /*   By: ltimsit- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 16:08:53 by ltimsit-          #+#    #+#             */
-/*   Updated: 2019/06/04 14:01:56 by ltimsit-         ###   ########.fr       */
+/*   Updated: 2019/06/04 14:34:49 by ltimsit-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int	main(int argc, char **argv)
 	init_cmd_fct();
 	pile.pile2_tab = (int *)malloc(sizeof(int) * argc - 1);
 	if (argc < 2 || !(check_nbr(argc, argv, &pile))
-			|| !(check_and_do_commands(&command, &pile)))
+			|| init_to_qs(&pile) || !(check_and_do_commands(&command, &pile)))
 	{
 		write(2, "Error\n", 6);
 		return (0);

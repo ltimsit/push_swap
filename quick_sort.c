@@ -6,7 +6,7 @@
 /*   By: ltimsit- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 16:38:04 by ltimsit-          #+#    #+#             */
-/*   Updated: 2019/05/27 20:46:49 by ltimsit-         ###   ########.fr       */
+/*   Updated: 2019/06/04 14:35:31 by ltimsit-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int partition(int *array, int start, int end)
 {
 	int pivot;
 	int p_index;
-	size_t i;
-	size_t j;
+	int i;
+	int j;
 	int *e1;
 	int *e2;
 
@@ -40,7 +40,7 @@ int partition(int *array, int start, int end)
 					ft_memswap((void *)e1 + j, (void *)e2 + j);
 					j++;
 				}
-				g_i++;
+				//g_i++;
 				j = 0;
 			}
 			p_index += i != end ? 1 : 0;
@@ -62,6 +62,7 @@ int quick_sort(int *array, int start, int end)
 	return (0);
 }
 
+/*
 int main()
 {
 	int tab[10];
@@ -85,3 +86,4 @@ int main()
 	printf("%d\n", g_i);
 	return (0);
 }
+*/
